@@ -44,23 +44,17 @@ def create_qa_chain(doc_store):
         temperature=0.3
     )
     prompt = PromptTemplate(
-    template="""
-    You are a highly intelligent and helpful AI assistant trained to provide accurate, complete, and user-friendly responses based only on the provided context.
+    template="""As an AI assistant, provide accurate, complete, and clear responses based strictly on the context.  
+
+    - For **how-to/process** questions: Give **step-by-step instructions**.  
+    - For **factual** questions: Be **precise and informative**.  
+    - If ambiguous, **clarify likely meanings**.  
+    - If the answer isn't in the context, state: "Information not available."  
     
-    - If the user asks a **how-to** or **process-related** question, give the answer in **clear, step-by-step instructions**.
-    - If the question is **factual**, provide a **precise and informative response**.
-    - If multiple interpretations are possible, **clarify or cover all likely meanings**.
-    - Be concise but **complete** — ensure the user gets exactly what they need without follow-up confusion.
+    **Context:** {context}  
+    **Question:** {question}  
     
-    Only use the information in the context below. If the context doesn't contain the answer, say clearly that the information is not available.
-    
-    Context:
-    {context}
-    
-    Question:
-    {question}
-    
-    Answer:
+    **Answer:**  
     """,
         input_variables=["context", "question"]
     )
