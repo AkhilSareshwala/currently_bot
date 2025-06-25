@@ -44,18 +44,30 @@ def create_qa_chain(doc_store):
         temperature=0.3
     )
     prompt = PromptTemplate(
-        template="""Answer the following question based only on the given context:
-{context}
-
-Question: {question}
-
-Answer:""",
+    template="""
+    You are a highly intelligent and helpful AI assistant trained to provide accurate, complete, and user-friendly responses based only on the provided context.
+    
+    - If the user asks a **how-to** or **process-related** question, give the answer in **clear, step-by-step instructions**.
+    - If the question is **factual**, provide a **precise and informative response**.
+    - If multiple interpretations are possible, **clarify or cover all likely meanings**.
+    - Be concise but **complete** — ensure the user gets exactly what they need without follow-up confusion.
+    
+    Only use the information in the context below. If the context doesn't contain the answer, say clearly that the information is not available.
+    
+    Context:
+    {context}
+    
+    Question:
+    {question}
+    
+    Answer:
+    """,
         input_variables=["context", "question"]
     )
     return RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
-        retriever=doc_store.as_retriever(search_kwargs={"k": 3}),
+        retriever=doc_store.as_retriever(search_kwargs={"k": 5}),
         chain_type_kwargs={"prompt": prompt},
         return_source_documents=False
     )
