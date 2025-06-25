@@ -1,0 +1,7 @@
+flask
+twilio
+langchain
+langchain-google-genai
+langchain-qdrant
+google-generativeai
+qdrant-client
