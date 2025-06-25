@@ -6,3 +6,4 @@ langchain-qdrant
 google-generativeai
 qdrant-client
 gunicorn
+langchain-groq
