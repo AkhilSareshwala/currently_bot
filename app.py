@@ -4,6 +4,7 @@ from langchain.chains import RetrievalQA
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from langchain_core.prompts import PromptTemplate
+from langchain_groq import ChatGroq
 import os
 
 # -----------------------------
@@ -12,6 +13,7 @@ import os
 QDRANT_URL = os.environ.get("QDRANT_URL")
 QDRANT_API_KEY = os.environ.get("QDRANT_API_KEY")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 COLLECTION_NAME = os.environ.get("COLLECTION_NAME", "currently_knowledgebase")
 TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
@@ -38,9 +40,9 @@ def initialize_components():
     return doc_store
 
 def create_qa_chain(doc_store):
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
-        google_api_key=GEMINI_API_KEY,
+    llm = ChatGroq(
+        groq_api_key=GROQ_API_KEY,
+        model_name="llama3-8b-8192",
         temperature=0.3
     )
     prompt = PromptTemplate(
