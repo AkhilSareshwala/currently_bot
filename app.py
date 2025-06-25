@@ -40,9 +40,9 @@ def initialize_components():
     return doc_store
 
 def create_qa_chain(doc_store):
-    llm = ChatGroq(
-        groq_api_key=GROQ_API_KEY,
-        model_name="llama3-8b-8192",
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-1.5-flash",
+        google_api_key=GEMINI_API_KEY,
         temperature=0.3
     )
     prompt = PromptTemplate(
