@@ -7,3 +7,9 @@ google-generativeai
 qdrant-client
 gunicorn
 langchain-groq
+flask
+twilio
+psycopg2-binary
+langchain
+langchain-google-genai
+langchain-qdrant
