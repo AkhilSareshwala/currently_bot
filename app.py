@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from langchain.chains import RetrievalQA
+from langchain_classic.chains import RetrievalQA
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from langchain_core.prompts import PromptTemplate
